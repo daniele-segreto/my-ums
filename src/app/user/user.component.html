@@ -5,3 +5,8 @@
 <td>{{user.phone}}</td>
 <td>{{user.province}}</td>
 <td>{{user.age}}</td>
+<td>
+  <!-- Non è necessario passare il parametro user, lo abbiamo già nel componente user (figlio) -->
+  <!-- <button class="delete" (click)="deleteUser(user)">DELETE</button> -->
+  <button class="delete" (click)="deleteUser()">DELETE</button>
+</td>

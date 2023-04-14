@@ -9,13 +9,10 @@
     <th>Province</th>
     <th>Age</th>
   </tr>
-  <tr *ngFor="let user of users">
-    <td>{{user.name}}</td>
-    <td>{{user.lastname}}</td>
-    <td>{{user.fidcalcode}}</td>
-    <td>{{user.email}}</td>
-    <td>{{user.phone}}</td>
-    <td>{{user.province}}</td>
-    <td>{{user.age}}</td>
+  <!-- PASSO I DATI AL COMPONENTE FIGLIO: -->
+  <!-- Con [user-data]="user" passiamo un dato a un componente figlio, inserendo il nome della variabile tra parentesi quadre -->
+  <tr app-user *ngFor="let user of users" [user-data]="user">
+    <!-- Invece di richiamare il componente <app-user>, mettiamo direttamente l'attributo nel tr (sopra, app-user) -->
+    <!-- <app-user></app-user> -->
   </tr>
 </table>

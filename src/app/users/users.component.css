@@ -6,14 +6,5 @@ th {
   color: green;
   background-color:  black;
   padding: 5px;
-}
-
-th, td {
-  padding: 5px;
   border: 1px solid #fff;
-}
-
-td {
-  background: silver;
-  color: red;
 }

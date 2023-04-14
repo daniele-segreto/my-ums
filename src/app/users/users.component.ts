@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { UserService } from '../user.service';
 
 @Component({
@@ -6,13 +6,17 @@ import { UserService } from '../user.service';
   templateUrl: './users.component.html',
   styleUrls: ['./users.component.css']
 })
-export class UsersComponent {
+export class UsersComponent implements OnInit {
 
   title = 'Users';
-  public users: any[] = []
+  users: any[] = []
 
-  constructor(private service: UserService) {
-    this.users = service.getUsers()
+  constructor(private service: UserService) {}
+
+  // ngOnInit() viene invocato solo una volta quando viene istanziata la direttiva,
+  // cioè viene chiamato solo quando il nostro componente è pronto
+  ngOnInit(): void {
+    this.users = this.service.getUsers();
   }
 
 }

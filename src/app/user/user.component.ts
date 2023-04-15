@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core'; // attenzione all'importazione di EventEmitter (deve essere importata da '@angular/core')
-import { UserService } from '../user.service';
+import { UserService } from '../services/user.service';
+import { User } from '../interfaces/user';
 
 @Component({
   selector: 'tr[app-user]', // selezione un elemento 'tr' che abbia come attributo [app-user]
@@ -9,7 +10,7 @@ import { UserService } from '../user.service';
 export class UserComponent {
   // RICEVO I DATI DAL COMPONENTE PADRE:
   // Ricevo in input dei valori attraverso quest variabile dall'esterno
-  @Input('user-data') user: any; // 'user-data' è un alias esterno
+  @Input('user-data') user: User | undefined; // 'user-data' è un alias esterno
 
   // EMETTO UN EVENTO IN MODO DA POTER ESSERE ASCOLTATO AL DI FUORI DEL COMPONENTE (grazie al decoratore @Output):
   // 'onDeleteUser' è il nome che avrà l'evento perché venga catturato*

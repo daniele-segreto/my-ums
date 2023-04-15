@@ -19,4 +19,9 @@ export class UsersComponent implements OnInit {
     this.users = this.service.getUsers();
   }
 
+  // Metodo che scatta all'emissione dell'evento in @Output('onDeleteUser') - riceve un utente
+  onDeleteUser(user: any) {
+    this.service.deleteUser(user); // chiamo il servizio e la funzione per cancellare l'utente
+  }
+
 }

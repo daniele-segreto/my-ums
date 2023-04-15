@@ -1,2 +1,10 @@
 <h1>User managemenbt system</h1>
-<app-users></app-users>
+<div class="main">
+  <div class="users">
+    <app-users></app-users>
+  </div>
+  <!-- *ngIf="false" => vuol dire che se il dettaglio è false non si vedrà, verrà rimosso dal DOM (viceversa se è true) -->
+  <div class="userDetail" *ngIf="false">
+    <app-user-detail></app-user-detail>
+  </div>
+</div>

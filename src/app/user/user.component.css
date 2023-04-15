@@ -4,14 +4,20 @@ td {
   background: silver;
   color: red;
 }
-
 button {
   padding: 5px;
   border: 1px solid #222;
   width: 80px;
 }
-
 button.delete {
-  background-color: #fff;
-  color: red;
+  color: #fffd;
+  background-color: red;
+}
+button.edit {
+  color: #fffd;
+  background-color: blue;
+}
+button.update {
+  color: #fffd;
+  background-color: green;
 }

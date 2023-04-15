@@ -1,10 +1,19 @@
 <h1>User managemenbt system</h1>
 <div class="main">
   <div class="users">
-    <app-users></app-users>
+      <!-- Con (updateUser) dico che voglio ascoltare questo evento;
+    Con il metodo 'updateUser' dico cosa voglio fare quando succederà (verrà emesso questo evento);
+    $event è una variabile che ci fornisce Angular per prenderci i dati che ci passa il componente filgio (serve appunto a catturare quello che abbiamo passato) -->
+    <app-users (updateUser)="updateUser($event)"></app-users>
   </div>
+
   <!-- *ngIf="false" => vuol dire che se il dettaglio è false non si vedrà, verrà rimosso dal DOM (viceversa se è true) -->
-  <div class="userDetail" *ngIf="false">
+  <!-- <div class="userDetail" *ngIf="true">...</div> -->
+
+  <!-- *ngIf="userSelected" => in questo caso mostro l'utente solo se è stato selezionato -->
+  <!-- Bisogna dichiarare la variabile 'userSelected' (l'utente selezionato) in app.component.ts,
+    che verrà passata sulla variabile '$event' e in automatico verrà mostrato, appunto questo template -->
+  <div class="userDetail" *ngIf="userSelected">
     <app-user-detail></app-user-detail>
   </div>
 </div>

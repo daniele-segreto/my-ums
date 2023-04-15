@@ -11,13 +11,17 @@
     <th>Actions</th>
   </tr>
   <!-- PASSO I DATI AL COMPONENTE FIGLIO: -->
-  <!-- Con [user-data]="user" passiamo un dato a un componente figlio, inserendo il nome della variabile tra parentesi quadre -->
-  <!-- Con (onDeleteUser) dico che voglio ascoltare questo evento;
+  <!-- (1) Con [user-data]="user" passiamo un dato a un componente figlio, inserendo il nome della variabile tra parentesi quadre -->
+  <!-- (2) Con (onDeleteUser) dico che voglio ascoltare questo evento;
     Con il metodo 'onDeleteUser' dico cosa voglio fare quando succederà (verrà emesso questo evento);
+    $event è una variabile che ci fornisce Angular per prenderci i dati che ci passa il componente filgio (serve appunto a catturare quello che abbiamo passato) -->
+  <!-- (3) Con (onSelectUser) dico che voglio ascoltare questo evento;
+    Con il metodo 'onSelectUser' dico cosa voglio fare quando succederà (verrà emesso questo evento);
     $event è una variabile che ci fornisce Angular per prenderci i dati che ci passa il componente filgio (serve appunto a catturare quello che abbiamo passato) -->
   <tr app-user
   *ngFor="let user of users" [user-data]="user"
   (onDeleteUser)="onDeleteUser($event)"
+  (onSelectUser)="onSelectUser($event)"
   >
     <!-- Invece di richiamare il componente <app-user>, mettiamo direttamente l'attributo nel tr (sopra, app-user) -->
     <!-- <app-user></app-user> -->

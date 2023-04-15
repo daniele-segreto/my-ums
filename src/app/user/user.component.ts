@@ -18,6 +18,10 @@ export class UserComponent {
   @Output('onDeleteUser') userDeleted = new EventEmitter();
   // NOTE: *Quasi sempre gli eventi vengono nominati con la parola on davanto e poi il nome dell'evento che vogliamo dare 'onDeleteUser'
 
+  // EMETTO UN EVENTO IN MODO DA POTER ESSERE ASCOLTATO AL DI FUORI DEL COMPONENTE (grazie al decoratore @Output):
+  // onSelectedUser è il nome della variabile utilizzata
+  @Output() onSelectUser = new EventEmitter();
+
   constructor(private userService: UserService) { }
 
   // Non è necessario passare il parametro user, lo abbiamo già ricevuto in @Input (sopra)
@@ -25,7 +29,9 @@ export class UserComponent {
   //   alert(user.lastname)
   // }
 
-  // Quindi accediamo al parametro user tramite il this
+  // Quindi accediamo al parametro user tramite il this...
+
+  // ELIMINA UTENTE
   deleteUser() {
     // utilizzo il metodo 'deleteUser' (che si trova sul nostro servizio 'userService')
     // e gli passiamo this.user (cioè l'utente corrente, dove abbiamo cliccato il pulsante)
@@ -33,6 +39,12 @@ export class UserComponent {
 
     // chiamiamo l'evento 'userDeleter', chiamiamo il metodo 'emit' per emettere l'evento
     this.userDeleted.emit(this.user); // passiamo come parametro l'utente che si vuole cancellare (quindi this.user)
+  }
+
+  // MODIFICA UTENTE
+  updateUser() {
+    // chiamiamo l'evento 'onSelectDeleter', chiamiamo il metodo 'emit' per emettere l'evento
+    this.onSelectUser.emit(this.user); // passiamo come parametro l'utente che si vuole cancellare (quindi this.user)
   }
 
 }

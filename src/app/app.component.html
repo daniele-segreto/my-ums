@@ -14,6 +14,12 @@
   <!-- Bisogna dichiarare la variabile 'userSelected' (l'utente selezionato) in app.component.ts,
     che verrà passata sulla variabile '$event' e in automatico verrà mostrato, appunto questo template -->
   <div class="userDetail" *ngIf="userSelected">
-    <app-user-detail></app-user-detail>
+    <!-- Possiamo ricevere la variabile user come input:
+      Passo lo userSelected, che è quello che ci passa il componente users nell'evento,
+      andiamo a dire che la variabile user, che deve essere in ingresso (indicata dalle parentesi quadre [user]) è uguale a userSelected.
+      Così stiamo iniettando il valore di userSelected a user.
+      E' possibile far vedere questo componente, andando in user-detail.html e mostrare la variabile user, passandola a json => {{user | json}}
+    -->
+    <app-user-detail [user]="userSelected"></app-user-detail>
   </div>
 </div>

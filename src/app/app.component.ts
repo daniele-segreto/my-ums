@@ -25,7 +25,7 @@ export class AppComponent {
   // }
 
   // Inizializzo la variabile per mostrare il form a false
-  showForm: boolean = false;
+  showForm = false; // ho tolto il tipo boolean, perchè quando abbiamo un valore di default lo interpreta in automatico
 
   // In userSelected abbiamo un nuovo utente inizializzato attraverso la classe 'User' che implementa l'interfaccia 'UserInterface'
   userSelected: User = new User();

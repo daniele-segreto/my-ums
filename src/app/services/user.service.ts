@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 // import { User } from '../interfaces/user';
 import { User } from '../classes/User'; // uso la classe anziché l’interfaccia
+import { UserInterface } from '../interfaces/user';
 
 @Injectable({
   providedIn: 'root'
@@ -76,6 +77,17 @@ export class UserService {
       // 2° elemento => quantità di elementi che vogliamo eliminare (in questo caso solo 1)
       // 3° elemento (non utilizzato nel nostro caso) => possiamo passare n° elementi da aggiungere (..items)
       this.users.splice(index, 1);
+    }
+  }
+
+  // Metodo per aggiornare l'utente - riceve user di tipo userInterface (possiamo chiamare anche User invece di UserInterface, perchè tanto la classe implementa quell'interface)
+  // 'findIndex' => serve a trovare l'indice di questo oggetto nell'array di 'users'
+  updatUser(user: UserInterface) {
+    const idx = this.users.findIndex((v) => v.id === user.id); // 'findIndex' aspetta in ingresso una funzione che tornerà true o false per il valore che vogliamo cercare, appena troverà un combaciamento con la condizione che stiamo passando, ritornerà quel valore e uscirà => dobbiamo verificare che l'id dell'utente che viene passato alla funzione sia uguale all'id dell'utente che ci viene passato per aggiornarlo, se tutti e due sono uguali, allora questa funzione 'findIndex' mi ritornerà l'index.
+    alert(idx); // verifichiamo che esiste
+    // verifichiamo che se l'idx (l'indice) è diverso da -1 (quindi vuol dire che lo ha trovato), allora noi andiamo ad aggiornare l'array
+    if (idx !== -1) {
+      this.users[idx] = {...user}; // l'utente alla posizione dell'indice è uguale al nuovo utente
     }
   }
 

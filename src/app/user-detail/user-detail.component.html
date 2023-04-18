@@ -1,11 +1,17 @@
 <!-- Passando questo valore avremo i dati dell'elemento a schermo:
   { "name": "Daniele1", "lastname": "Segreto1", "email": "daniele@gmail.com", "fiscalcode": "SGTDAN77J33X777Z", "province": "Palermo", "phone": "3334455678", "age": 33 }.
-  Bisogna fare in modo da pololare questo form con questi valori (come fare il binding)
+  Bisogna fare in modo da popolare questo form con questi valori (come fare il binding)
 
   Tramite ngModel riusciamo a fare il binding tra i parametri del form e queste proprietà dell'oggetto user.
 -->
-{{user | json}}
+<!-- {{user | json}} -->
 <form class="userForm">
+  <!-- Possiamo passare user.id in un campo nascosto perchè ci può servire per inviare i dati, però quando in realtà andiamo ad aggiornare l'utente con il tasto save, noi possiamo avere questo id.
+  Per esempio se sul file ts, al metodo 'saveUser' mettiamo l'alert dell'id, noi avremo accesso a quell'id:
+  saveUser() {
+    alert(this.user.id) // => .id
+  } -->
+  <input type="hidden" name="id" [(ngModel)]="user.id">
   <div class="form-group">
     <label for="firtstname">First name</label>
     <!-- [] = variabile in input; () => variabile in output
@@ -36,9 +42,11 @@
   </div>
   <div class="form-group">
     <label for="province">Province</label>
-    <input [(ngModel)]="user.province" type="text" name="province" id="phone"> <!-- mancava -->
+    <input [(ngModel)]="user.province" type="text" name="province" id="phone">
   </div>
   <div class="form-group form-footer">
-    <button class="btn-save">SAVE</button>
+    <!-- Non abbiamo bisogno di usare il componente perchè lo abbiamo già in @Input in user.detail.component.ts.
+    Siccome lo stiamo passando per riferimento, quindi con [(ngModel)], lo stiamo passando sia in uscita che in ingresso, allora avremo accesso a questo dato -->
+    <button class="btn-save" (click)="saveUser()">SAVE</button>
   </div>
 </form>

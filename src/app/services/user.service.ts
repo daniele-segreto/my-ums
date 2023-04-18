@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
-import { User } from '../interfaces/user';
+// import { User } from '../interfaces/user';
+import { User } from '../classes/User'; // uso la classe anziché l’interfaccia
 
 @Injectable({
   providedIn: 'root'
@@ -17,6 +18,7 @@ export class UserService {
 
   users: User[] = [
     {
+      id: 1, // mancavano gli id
       name: 'Daniele1',
       lastname: 'Segreto1',
       email: 'daniele@gmail.com',
@@ -26,6 +28,7 @@ export class UserService {
       age: 33,
     },
     {
+      id: 2,
       name: 'Daniele2',
       lastname: 'Segreto2',
       email: 'daniele@gmail.com',
@@ -35,6 +38,7 @@ export class UserService {
       age: 33
     },
     {
+      id: 3,
       name: 'Daniele3',
       lastname: 'Segreto3',
       email: 'daniele@gmail.com',
@@ -44,6 +48,7 @@ export class UserService {
       age: 33
     },
     {
+      id: 4,
       name: 'Daniele4',
       lastname: 'Segreto4',
       email: 'daniele@gmail.com',
@@ -67,9 +72,9 @@ export class UserService {
     // quindi se l'indice è maggiore di -1 (quindi da 0 in poi), noi andiamo ad eliminare quell'elemento (l'utente) con 'splice'
     if (index > -1) {
       // il metodo 'splice' accetta come parametri:
-      // 1° elemento => da quale posizione vogliamo cominciare a togliere emenento (da index, l'indice selezionato)
+      // 1° elemento => da quale posizione vogliamo cominciare a togliere l’elemento (da index, l'indice selezionato)
       // 2° elemento => quantità di elementi che vogliamo eliminare (in questo caso solo 1)
-      // 3° elemento (non tutilizzato nel nostro caso) => possiamo passsare n° elementi da aggiungere (..items)
+      // 3° elemento (non utilizzato nel nostro caso) => possiamo passare n° elementi da aggiungere (..items)
       this.users.splice(index, 1);
     }
   }

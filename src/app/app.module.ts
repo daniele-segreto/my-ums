@@ -6,7 +6,7 @@ import { AppComponent } from './app.component';
 import { UsersComponent } from './users/users.component';
 import { UserComponent } from './user/user.component';
 import { UserDetailComponent } from './user-detail/user-detail.component';
-// Per poter utilizzare la direttiva ngModule e tutto quello che ha a che vedere con i form , dobbiamo importare il FormsModule
+// Importo FormsModule per poter utilizzare la direttiva ngModule e tutto quello che ha a che vedere con i form
 import { FormsModule } from '@angular/forms';
 
 @NgModule({

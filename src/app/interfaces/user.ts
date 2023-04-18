@@ -1,4 +1,5 @@
-export interface User {
+export interface UserInterface {
+  id: number; // aggiungo l'id (che non sarà modificabile)
   name: string;
   lastname: string;
   email: string;

@@ -1,6 +1,7 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { UserService } from '../services/user.service';
-import { User } from '../interfaces/user';
+// import { User } from '../interfaces/user';
+import { User } from '../classes/User'; // uso la classe anziché l’interfaccia
 
 @Component({
   selector: 'app-users',
@@ -30,9 +31,11 @@ export class UsersComponent implements OnInit {
 
   // Metodo che scatta all'emissione dell'evento in @Output('onSelectUser') - riceve un utente di tipo User
   onSelectUser(user: User) {
-    // alert(user.lastname); // al click, riceviamo un alert con il cognome dell'utente selezionato
-    this.updateUser.emit(user); // chiamo il servizio e la funzione per avviare il form di modifica
+    // Passo una copia dell'utente e non il riferimento
+    // All'oggetto javascript diamo il metodo assign, a cui passiamo un oggetto target (in questo caso un oggetto vuoto) e poi l'oggetto da cui copiare (in questo caso sarebbe una copia di dell'oggetto user)
+    const userCopy = Object.assign({}, user);
+    this.updateUser.emit(userCopy); // chiamo la funzione per avviare/emettere il form di modifica, passandogli la copia del nostro oggetto
   }
-  // A questo punto, questo evento viene rilanciato all'esterno e l'app.component può ascoltare e rispondere a questo evento
+  // A questo punto, questo evento viene rilanciato all'esterno e l'app.component.html può ascoltare e rispondere a questo evento
 
 }

@@ -10,10 +10,10 @@
   <!-- *ngIf="false" => vuol dire che se il dettaglio è false non si vedrà, verrà rimosso dal DOM (viceversa se è true) -->
   <!-- <div class="userDetail" *ngIf="true">...</div> -->
 
-  <!-- *ngIf="userSelected" => in questo caso mostro l'utente solo se è stato selezionato -->
-  <!-- Bisogna dichiarare la variabile 'userSelected' (l'utente selezionato) in app.component.ts,
+  <!-- *ngIf="showForm" => in questo caso mostro l'utente solo se è stato selezionato -->
+  <!-- Bisogna dichiarare la variabile 'showForm' (l'utente selezionato) in app.component.ts,
     che verrà passata sulla variabile '$event' e in automatico verrà mostrato, appunto questo template -->
-  <div class="userDetail" *ngIf="userSelected">
+  <div class="userDetail" *ngIf="showForm">
     <!-- Possiamo ricevere la variabile user come input:
       Passo lo userSelected, che è quello che ci passa il componente users nell'evento,
       andiamo a dire che la variabile user, che deve essere in ingresso (indicata dalle parentesi quadre [user]) è uguale a userSelected.

@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core'; // attenzione all'importazione di EventEmitter (deve essere importata da '@angular/core')
 import { UserService } from '../services/user.service';
-import { User } from '../interfaces/user';
+// import { User } from '../interfaces/user';
+import { User } from '../classes/User'; // uso la classe anziché l’interfaccia
 
 @Component({
   selector: 'tr[app-user]', // selezione un elemento 'tr' che abbia come attributo [app-user]
@@ -37,7 +38,7 @@ export class UserComponent {
     // e gli passiamo this.user (cioè l'utente corrente, dove abbiamo cliccato il pulsante)
     // this.userService.deleteUser(this.user);
 
-    // chiamiamo l'evento 'userDeleter', chiamiamo il metodo 'emit' per emettere l'evento
+    // chiamiamo l'evento 'userDeleted', chiamiamo il metodo 'emit' per emettere l'evento
     this.userDeleted.emit(this.user); // passiamo come parametro l'utente che si vuole cancellare (quindi this.user)
   }
 
@@ -46,5 +47,6 @@ export class UserComponent {
     // chiamiamo l'evento 'onSelectDeleter', chiamiamo il metodo 'emit' per emettere l'evento
     this.onSelectUser.emit(this.user); // passiamo come parametro l'utente che si vuole cancellare (quindi this.user)
   }
+  // A questo punto, questo evento viene rilanciato all'esterno e users.component.html può ascoltare e rispondere a questo evento
 
 }

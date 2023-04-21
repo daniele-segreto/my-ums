@@ -2,7 +2,7 @@ import { Component, Input } from '@angular/core';
 // import { User } from '../interfaces/user';
 import { User } from '../classes/User'; // uso la classe anziché l’interfaccia
 import { UserService } from '../services/user.service';
-import { FormGroup } from '@angular/forms'; ///////
+import { FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-user-detail',
@@ -10,23 +10,24 @@ import { FormGroup } from '@angular/forms'; ///////
   styleUrls: ['./user-detail.component.css']
 })
 export class UserDetailComponent {
-  // Dichiaro la variabile con @Inpunt per far riceverla a form-detail
-  @Input() user!: User;
-  // ^ ho tolto undefined in modo da evitare errori in tempo di esecuzione, tutto questo viene controllato dallo strict messo nel file di configurazione tsconfig.json
+  // Dichiarazione di due variabili private della classe UserComponent
+  private userCopy!: User;
+  private __user!: User;
 
-  // Finchè non creiamo una classe user che possiamo instanziare e creare un oggetto nuovo, possiamo inizializzare sia quì (nel costruttore), che in user-detail.component.ts, un oggetto con le stesse proprietà della interface e con i valori vuoti
-  // constructor() {
-  //   this.user = {
-  //     id: 0, // aggiungo l'id
-  //     name: '',
-  //     lastname: '',
-  //     email: '',
-  //     fiscalcode: '',
-  //     province: '',
-  //     phone: '',
-  //     age: 0,
-  //   }
-  // }
+  // Definizione del setter 'user' con l'annotazione @Input
+  // Questo setter viene richiamato quando il componente padre passa l'oggetto 'user' come input
+  @Input() set user(user: User) {
+  // L'oggetto 'user' viene salvato nella variabile '__user'
+  this.__user = user;
+  // Viene creato un nuovo oggetto 'userCopy' con i valori dell'oggetto 'user'
+  // Questo oggetto serve per creare una copia di backup dell'oggetto originale e utilizzarlo in caso di necessità
+  this.userCopy = Object.assign({}, user);
+}
+
+// Definizione del getter 'user' che restituisce l'oggetto '__user'
+get user() {
+  return this.__user;
+}
 
   constructor(private userService: UserService) { } // inietto il servizio sul costruttore
 
@@ -49,7 +50,7 @@ export class UserDetailComponent {
     if (this.user.id === 0) { // se user.id è uguale a zero, cioè se l'utente inserito sul form è un nuovo utente
       this.user = new User(); // andiamo a ripopolare il form (il form viene resettato)
     } else {
-      form.reset(); // altrimenti resettiamo il form completamente
+      this.__user = this.userCopy; // altrimenti resettiamo il form completamente
     }
   }
 

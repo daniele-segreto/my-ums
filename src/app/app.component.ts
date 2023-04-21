@@ -35,4 +35,11 @@ export class AppComponent {
     this.showForm = true; // modifico la variabile a true, solo quando scatta questa funzione
     this.userSelected = user; // L'utente selezionato sarà l'utente che viene passato come parametro in questa funzione
   }
+
+  // Nuovo utente
+  newUser() {
+    this.userSelected = new User(); // reinizializziamo userSelected (viene il form nuovo, senza alcun utente inserito)
+    this.showForm = true; // mostriamo il form
+  }
+
 }

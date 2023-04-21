@@ -91,4 +91,9 @@ export class UserService {
     }
   }
 
+  // Metodo per creare un nuovo utente
+  createUser(user: UserInterface) {
+    this.users.splice(0, 0, {...user}); // metto l'utente in testa al form, quindi con 'splice' dico che deve essere alla posizione 0, che non devo eliminare nessun record (di nuvo 0) e che voglio aggiungere un nuovo utente {...user}
+  }
+
 }

@@ -5,7 +5,11 @@
   Tramite ngModel riusciamo a fare il binding tra i parametri del form e queste proprietà dell'oggetto user.
 -->
 <!-- {{user | json}} -->
-<form class="userForm">
+<!-- #f è una template variable che è uguale a ng form; -->
+<!-- {{f.form.value | json}} serve solo a vedere a cosa corrisponde f, o f.form, o f.form.value,
+ovvero tutte le proprietà o i valori del form che in automatico Angular espone per noi quando abbiamo importato il mododulo FormModule, ad Es:
+{ "id": 1, "firtstname": "Daniele1", "lastname": "Segreto1", "fiscalcode": "SGTDAN77J33X777Z", "phone": "3334455678", "email": "daniele@gmail.com", "age": 33, "province": "Palermo" } -->
+<form class="userForm" #f="ngForm"> {{f.form.value | json}}
   <!-- Possiamo passare user.id in un campo nascosto perchè ci può servire per inviare i dati, però quando in realtà andiamo ad aggiornare l'utente con il tasto save, noi possiamo avere questo id.
   Per esempio se sul file ts, al metodo 'saveUser' mettiamo l'alert dell'id, noi avremo accesso a quell'id:
   saveUser() {
@@ -45,6 +49,8 @@
     <input [(ngModel)]="user.province" type="text" name="province" id="phone">
   </div>
   <div class="form-group form-footer">
+    <!-- Passiamo alla funzione 'resetForm', la variabile template 'f' con accesso ai dati del form (f.form) -->
+    <button class="reset" (click)="resetForm(f.form)">RESET</button>
     <!-- Non abbiamo bisogno di usare il componente perchè lo abbiamo già in @Input in user.detail.component.ts.
     Siccome lo stiamo passando per riferimento, quindi con [(ngModel)], lo stiamo passando sia in uscita che in ingresso, allora avremo accesso a questo dato -->
     <button class="btn-save" (click)="saveUser()">SAVE</button>

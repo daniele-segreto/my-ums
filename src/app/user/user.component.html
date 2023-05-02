@@ -6,10 +6,19 @@
 <td>{{user?.province}}</td>
 <td>{{user?.age}}</td>
 <td>
-  <!-- Non è necessario passare il parametro user, lo abbiamo già nel componente user (figlio) -->
-  <!-- <button class="delete" (click)="deleteUser(user)">DELETE</button> -->
-  <!-- TASTO ELIMINA -->
-  <button class="delete" (click)="deleteUser()">DELETE</button>
-  <!-- TASTO MODIFICA -->
-  <button class="update" (click)="updateUser()">UPDATE</button>
+  <div class="row">
+    <div class="col-sm-6">
+      <!-- MODIFICA -->
+      <button class="btn btn-primary btn-sm" (click)="updateUser()">
+        <fa-icon [icon]="faPen" [size]="iconSize"></fa-icon>
+      </button>
+    </div>
+    <!-- ELIMINA -->
+    <div class="col-sm-6">
+      <button class="btn btn-danger btn-sm" (click)="deleteUser()">
+        <fa-icon [icon]="faTrash" [size]="iconSize"></fa-icon>
+      </button>
+    </div>
+    <!-- Con la proprietà size="4x" posso gestire le dimensioni delle icone -->
+  </div>
 </td>

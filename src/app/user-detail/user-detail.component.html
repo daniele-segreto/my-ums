@@ -1,58 +1,35 @@
-<!-- Passando questo valore avremo i dati dell'elemento a schermo:
-  { "name": "Daniele1", "lastname": "Segreto1", "email": "daniele@gmail.com", "fiscalcode": "SGTDAN77J33X777Z", "province": "Palermo", "phone": "3334455678", "age": 33 }.
-  Bisogna fare in modo da popolare questo form con questi valori (come fare il binding)
-
-  Tramite ngModel riusciamo a fare il binding tra i parametri del form e queste proprietà dell'oggetto user.
--->
-<!-- {{user | json}} -->
-<!-- #f è una template variable che è uguale a ng form; -->
-<!-- {{f.form.value | json}} serve solo a vedere a cosa corrisponde f, o f.form, o f.form.value,
-ovvero tutte le proprietà o i valori del form che in automatico Angular espone per noi quando abbiamo importato il mododulo FormModule, ad Es:
-{ "id": 1, "firtstname": "Daniele1", "lastname": "Segreto1", "fiscalcode": "SGTDAN77J33X777Z", "phone": "3334455678", "email": "daniele@gmail.com", "age": 33, "province": "Palermo" } -->
-<form class="userForm" #f="ngForm"> {{f.form.value | json}}
-  <!-- Possiamo passare user.id in un campo nascosto perchè ci può servire per inviare i dati, però quando in realtà andiamo ad aggiornare l'utente con il tasto save, noi possiamo avere questo id.
-  Per esempio se sul file ts, al metodo 'saveUser' mettiamo l'alert dell'id, noi avremo accesso a quell'id:
-  saveUser() {
-    alert(this.user.id) // => .id
-  } -->
+<form class="userForm" #f="ngForm">
   <input type="hidden" name="id" [(ngModel)]="user.id">
   <div class="form-group">
     <label for="firtstname">First name</label>
-    <!-- [] = variabile in input; () => variabile in output
-    Se uso entrambe le parentesi in [(ngModel)] => modifico sia in valore in input (sul form), che il valore originale;
-    Se uso solo le parentesi quadre [ngModel] => modifico solo in valore in input (sul form). -->
-    <!-- <input [ngModel]="user.name" name="firtstname" id="firtstname"> -->
-    <input [(ngModel)]="user.name" name="firtstname" id="firtstname">
+    <input class="form-control" [(ngModel)]="user.name" name="firtstname" id="firtstname">
   </div>
   <div class="form-group">
     <label for="lastname">Last name</label>
-    <input [(ngModel)]="user.lastname" name="lastname" id="lastname">
+    <input class="form-control" [(ngModel)]="user.lastname" name="lastname" id="lastname">
   </div>
   <div class="form-group">
     <label for="fiscalcode">Fiscal code</label>
-    <input [(ngModel)]="user.fiscalcode" name="fiscalcode" id="fiscalcode">
+    <input class="form-control" [(ngModel)]="user.fiscalcode" name="fiscalcode" id="fiscalcode">
   </div>
   <div class="form-group">
     <label for="phone">Phone</label>
-    <input [(ngModel)]="user.phone" name="phone" id="phone">
+    <input class="form-control" [(ngModel)]="user.phone" name="phone" id="phone">
   </div>
   <div class="form-group">
     <label for="email">Email</label>
-    <input [(ngModel)]="user.email" type="email" name="email" id="email">
+    <input class="form-control" [(ngModel)]="user.email" type="email" name="email" id="email">
   </div>
   <div class="form-group">
     <label for="age">Age</label>
-    <input [(ngModel)]="user.age" type="number" name="age" id="age">
+    <input class="form-control" [(ngModel)]="user.age" type="number" name="age" id="age">
   </div>
   <div class="form-group">
     <label for="province">Province</label>
-    <input [(ngModel)]="user.province" type="text" name="province" id="phone">
+    <input class="form-control" [(ngModel)]="user.province" type="text" name="province" id="phone">
   </div>
   <div class="form-group form-footer">
-    <!-- Passiamo alla funzione 'resetForm', la variabile template 'f' con accesso ai dati del form (f.form) -->
-    <button class="reset" (click)="resetForm(f.form)">RESET</button>
-    <!-- Non abbiamo bisogno di usare il componente perchè lo abbiamo già in @Input in user.detail.component.ts.
-    Siccome lo stiamo passando per riferimento, quindi con [(ngModel)], lo stiamo passando sia in uscita che in ingresso, allora avremo accesso a questo dato -->
-    <button class="btn-save" (click)="saveUser()">SAVE</button>
+    <button class="btn btn-outline-secondary" (click)="resetForm(f.form)">RESET</button>
+    <button class="btn btn-success" (click)="saveUser()">SAVE</button>
   </div>
 </form>

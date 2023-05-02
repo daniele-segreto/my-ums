@@ -39,7 +39,7 @@ get user() {
     // verifichiamo se esiste l'id o no.
     // Possiamo verificare: se l'id è true (o se è maggiore di 0, sappiamo che 0 è uguale a false), devo chiamare il servizio e il suo metodo (passando come parametro l'utente stesso)
     if (this.user.id > 0) {
-      this.userService.updatUser(this.user); // (nel caso in cui abbiamo già l'utente) chiamo dunque il metodo per aggiornare l'utente
+      this.userService.updateUser(this.user); // (nel caso in cui abbiamo già l'utente) chiamo dunque il metodo per aggiornare l'utente
     } else {
       this.userService.createUser(this.user); // altrimenti chiamo il metodo per creare un nuovo utente
     }
@@ -50,7 +50,7 @@ get user() {
     if (this.user.id === 0) { // se user.id è uguale a zero, cioè se l'utente inserito sul form è un nuovo utente
       this.user = new User(); // andiamo a ripopolare il form (il form viene resettato)
     } else {
-      this.__user = this.userCopy; // altrimenti resettiamo il form completamente
+      this.__user = this.userCopy; // altrimenti resettiamo il form alla sua copia iniziale
     }
   }
 

@@ -82,7 +82,7 @@ export class UserService {
 
   // Metodo per aggiornare l'utente - riceve user di tipo userInterface (possiamo chiamare anche User invece di UserInterface, perchè tanto la classe implementa quell'interface)
   // 'findIndex' => serve a trovare l'indice di questo oggetto nell'array di 'users'
-  updatUser(user: UserInterface) {
+  updateUser(user: UserInterface) {
     const idx = this.users.findIndex((v) => v.id === user.id); // 'findIndex' aspetta in ingresso una funzione che tornerà true o false per il valore che vogliamo cercare, appena troverà un combaciamento con la condizione che stiamo passando, ritornerà quel valore e uscirà => dobbiamo verificare che l'id dell'utente che viene passato alla funzione sia uguale all'id dell'utente che ci viene passato per aggiornarlo, se tutti e due sono uguali, allora questa funzione 'findIndex' mi ritornerà l'index.
     alert(idx); // verifichiamo che esiste
     // verifichiamo che se l'idx (l'indice) è diverso da -1 (quindi vuol dire che lo ha trovato), allora noi andiamo ad aggiornare l'array

@@ -22,6 +22,10 @@ const routes: Routes = [
   {
     path: 'users/new', // questa è la rotta per quando creiamo un nuovo utente
     component: UserDetailComponent
+  },
+  {
+    path: 'users/:id/edit', // :id è un placeholder per dire "catturami" qualsiasi cosa ci sia tra users e id (nel nostro caso per noi ci sarà il numero 1 => http://localhost:4200/users/1/edit). Ora bisogna catturare questo numero quando siamo in questo componente attraverso il servizio ActivatedRoute (che ci viene messo a disposizione dal RouterModule)
+    component: UserDetailComponent
   }
 ];
 

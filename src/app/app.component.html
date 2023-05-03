@@ -2,15 +2,10 @@
 <app-nav (onNewUser)="newUser()"></app-nav>
 <div class="container">
   <h1>User management system</h1>
-  <!-- Lo togliamo per andarlo a mettere sulla barra di navigazione -->
-  <!-- <a href="#" (click)="newUser()">New User</a> -->
-
   <div class="row">
-    <div class="col-md-7">
-      <app-users (updateUser)="updateUser($event)"></app-users>
-    </div>
-    <div class="col-sm-5" *ngIf="showForm">
-      <app-user-detail [user]="userSelected"></app-user-detail>
+    <div class="col-12">
+      <!-- Con 'router-outlet' dico ad Angular di renderizzare il componente che ha trovato (attraverso il click sulle voci della navbar) -->
+      <router-outlet></router-outlet>
     </div>
   </div>
 </div>

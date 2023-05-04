@@ -52,13 +52,15 @@ export class UserService {
     },
   ];
 
-  getUsers() {
+  // getUsers() ritorna un array di utenti (meglio tipicizzare)
+  getUsers(): User[] {
     return this.users;
   }
 
-  // Riceve un id e ritorna un utente a quella posizione (cioè alla stessa posizione dell'id selezionato)
-  getUser(id: number): User {
-    return this.users[id];
+  // getUser() riceve un id e ritorna un utente a quella posizione (cioè alla stessa posizione dell'id selezionato), oppure undefined
+  getUser(id: number): User | undefined {
+    // Restituisce l'utente corrispondente all'id utilizzando il metodo find sull'array degli utenti
+    return this.users.find(user => user.id === id);
   }
 
   deleteUser(user: User) {
@@ -70,7 +72,7 @@ export class UserService {
 
   updateUser(user: UserInterface) {
     const idx = this.users.findIndex((v) => v.id === user.id);
-    alert(idx);
+    // alert(idx);
     if (idx !== -1) {
       this.users[idx] = {...user};
     }

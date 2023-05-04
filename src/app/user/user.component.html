@@ -9,9 +9,17 @@
   <div class="row">
     <div class="col-sm-6">
       <!-- MODIFICA -->
-      <button class="btn btn-primary btn-sm" (click)="updateUser()">
+      <!-- <button class="btn btn-primary btn-sm" (click)="updateUser()">
         <fa-icon [icon]="faPen" [size]="iconSize"></fa-icon>
-      </button>
+      </button> -->
+      <!-- Invece che mettere un pulsante/button con un click (come sul codice sopra commmentato),
+      possiamo mettere un tag a con un routerLink, passandogli la rotta che deve generare -->
+      <a class="btn btn-primary btn-sm">
+        <!-- 1) Possiamo scriverlo manualmente -->
+        <!-- <fa-icon [icon]="faPen" [size]="iconSize" routerLink="/users/{{user?.id}}"></fa-icon> -->
+        <!-- 2) Oppure possiamo scriverlo come abbiamo fatto con il metodo 'navigate', passiamo un array di parametri (in cui passiamo i pezzi che dobbiamo passare). In questo caso, per passare un oggetto (come l'array), dobbiamo mettere il [routerLink] come proprietà, quindi appunto con le parentesi quadre -->
+        <fa-icon [icon]="faPen" [size]="iconSize" [routerLink]="['/users', user?.id, 'edit']"></fa-icon>
+      </a>
     </div>
     <!-- ELIMINA -->
     <div class="col-sm-6">
@@ -19,6 +27,5 @@
         <fa-icon [icon]="faTrash" [size]="iconSize"></fa-icon>
       </button>
     </div>
-    <!-- Con la proprietà size="4x" posso gestire le dimensioni delle icone -->
   </div>
 </td>

@@ -7,25 +7,28 @@
 <td>{{user?.age}}</td>
 <td>
   <div class="row">
-    <div class="col-sm-6">
-      <!-- MODIFICA -->
-      <!-- <button class="btn btn-primary btn-sm" (click)="updateUser()">
+    <!-- DETTAGLIO -->
+    <div class="col-sm">
+      <!-- // *Avremmo anche potuto usare un (click) con la funzione 'showUserdetail' sul ts, piuttosto che [routerLink]
+        <a class="btn btn-primary btn-sm w-50" (click)="showUserDetail()"></a> -->
+      <a class="btn btn-primary btn-sm w-50" [routerLink]="['/users', user?.id]">
+        <fa-icon [icon]="faInfo" [size]="iconSize"></fa-icon>
+      </a>
+    </div>
+    <!-- MODIFICA -->
+    <div class="col-sm">
+      <a class="btn btn-primary btn-sm w-50" [routerLink]="['/users', user?.id, 'edit']">
         <fa-icon [icon]="faPen" [size]="iconSize"></fa-icon>
-      </button> -->
-      <!-- Invece che mettere un pulsante/button con un click (come sul codice sopra commmentato),
-      possiamo mettere un tag a con un routerLink, passandogli la rotta che deve generare -->
-      <a class="btn btn-primary btn-sm">
-        <!-- 1) Possiamo scriverlo manualmente -->
-        <!-- <fa-icon [icon]="faPen" [size]="iconSize" routerLink="/users/{{user?.id}}"></fa-icon> -->
-        <!-- 2) Oppure possiamo scriverlo come abbiamo fatto con il metodo 'navigate', passiamo un array di parametri (in cui passiamo i pezzi che dobbiamo passare). In questo caso, per passare un oggetto (come l'array), dobbiamo mettere il [routerLink] come proprietà, quindi appunto con le parentesi quadre -->
-        <fa-icon [icon]="faPen" [size]="iconSize" [routerLink]="['/users', user?.id, 'edit']"></fa-icon>
       </a>
     </div>
     <!-- ELIMINA -->
-    <div class="col-sm-6">
-      <button class="btn btn-danger btn-sm" (click)="deleteUser()">
+    <div class="col-sm">
+      <button class="btn btn-danger btn-sm w-50" (click)="deleteUser()">
         <fa-icon [icon]="faTrash" [size]="iconSize"></fa-icon>
       </button>
     </div>
   </div>
 </td>
+
+<!-- Ho inserito la classe 'w-50' per dare a tutti i pulsanti la stessa dimensione -->
+<!-- CORREZIONE ERRORE: Avevo messo il [routerLink] sulla 'fav-icon', invece che sul tag 'a' -->

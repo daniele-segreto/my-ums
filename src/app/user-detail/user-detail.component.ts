@@ -2,7 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { User } from '../classes/User';
 import { UserService } from '../services/user.service';
 import { FormGroup } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-user-detail',
@@ -22,28 +22,22 @@ get user() {
   return this.__user;
 }
 
-  // Inietto il servizio ActivatedRoute (che ci viene messo a disposizione dal RouterModule)
-  constructor(private userService: UserService,private route: ActivatedRoute) {
-    // Creo un nuovo oggetto della classe User e lo assegno alla proprietà user della classe
+  constructor(private userService: UserService,
+              private route: ActivatedRoute,
+              private router: Router // Inetto anche il Router
+  ) {
     this.user = new User();
-    // Creo un nuovo oggetto della classe User e lo assegno alla proprietà __user della classe
     this.__user = new User();
-    // Creo un nuovo oggetto della classe User e lo assegno alla proprietà userCopy della classe
     this.userCopy = new User();
   }
 
   ngOnInit(): void {
-    // Sottoscrizione ai cambiamenti dei parametri dell'URL
     this.route.params.subscribe(param => {
-      // Estrazione dell'id dall'URL e conversione in numero
-      const id = Number(param['id']); // '12'
-      const user = this.userService.getUser(id); // Chiamata al servizio per recuperare l'utente in base all'id
-      // Se l'utente esiste, lo assegna alla proprietà 'user' del componente...
-      // ...altrimenti rimane l'utente predefinito, un utente vuoto (questo non succederà mai perchè in realtà, noi il parametro lo passeremo)
+      const id = Number(param['id']);
+      const user = this.userService.getUser(id);
       if (user) {
         this.user = user;
       }
-      // Nel senso, se cerchiamo per esempio 'localhost:4200/users/33/edit' non trova niente perchè è vuoto, quindi rimane l'utente vuoto
     })
   }
 
@@ -53,8 +47,10 @@ get user() {
     } else {
       this.userService.createUser(this.user);
     }
-    // Dissociamo 'this.user' dall'utente precedentemente creato/modificato
-    this.user = new User();
+    // Adesso non c'è più bisogno di resettare, perchè in questo caso ritorniamo alla home page
+    // this.user = new User();
+    // Dopo aver salvato l'utente, possiamo tornare alla home page (in questo caso 'users')
+    this.router.navigate(['users']); // 'users' è il percorso il cui vogliamo navigare
   }
 
   resetForm(form: FormGroup) {

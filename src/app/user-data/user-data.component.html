@@ -1,6 +1,46 @@
-<!-- Per verificare inserisco la variabile user con la pipe json,
-  in modo tale da poter vedere la rappresentazione di quell'oggetto come una stringa json -->
-<p>{{user | json}}</p>
-
-<!-- Questo oggetto rappresenta la rotta che è stata attivata, ad esempio se cerco 'http://localhost:4200/users/1', vedrò a schermo l'oggetto:
-  { "id": 1, "name": "Daniele1", "lastname": "Segreto1", "email": "daniele@gmail.com", "fiscalcode": "SGTDAN77J33X777Z", "province": "Palermo", "phone": "3334455678", "age": 33 } -->
+<h2>User Detail</h2>
+<!-- {{user|json}} // Visualizzo il json con le proprietà dell'utente cliccato -->
+<!-- Con *ngIf="user", la tabella sarà visibile, solo se esiste l'utente... -->
+<table class="table table-dark table-striped" *ngIf="user">
+  <tbody>
+    <tr>
+      <th>Name</th>
+      <td>{{user.name}}</td>
+    </tr>
+    <tr>
+      <th>Last name</th>
+      <td>{{user.lastname}}</td>
+    </tr>
+    <tr>
+      <th>Fiscal code</th>
+      <td>{{user.fiscalcode}}</td>
+    </tr>
+    <tr>
+      <th>Email</th>
+      <td>{{user.email}}</td>
+    </tr>
+    <tr>
+      <th>Province</th>
+      <td>{{user.province}}</td>
+    </tr>
+    <tr>
+      <th>Phone</th>
+      <td>{{user.phone}}</td>
+    </tr>
+    <tr>
+      <th>Age</th>
+      <td>{{user.age}}</td>
+    </tr>
+  </tbody>
+  <tfoot>
+    <!-- TASTO PER TORNARE ALL'ELENCO DEGLI UTENTI
+    (N.B. ho tolto la classe 'w-50' sul tag 'a') -->
+    <td colspan="2" class="text-center">
+      <a class="btn btn-primary btn-lg" [routerLink]="['/users']">BACK TO USERS</a>
+    </td>
+  </tfoot>
+</table>
+<!-- ...se invece l'utente non esiste (ad esempio cercandolo con: 'http://localhost:4200/users/3333'), visualizzeremo un 'h2' contenente la scritta 'No user found' -->
+<div *ngIf="!user">
+  <h2>No user found</h2>
+</div>

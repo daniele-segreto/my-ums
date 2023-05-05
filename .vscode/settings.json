@@ -3,5 +3,6 @@
         "activityBar.background": "#1B3130",
         "titleBar.activeBackground": "#264543",
         "titleBar.activeForeground": "#F8FBFB"
-    }
+    },
+    "vscode.tsc.compiler.alertTSConfigChanges": "never"
 }

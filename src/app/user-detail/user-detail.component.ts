@@ -23,21 +23,14 @@ get user() {
 }
 
   // Inietto il servizio ActivatedRoute (che ci viene messo a disposizione dal RouterModule)
-  constructor(private userService: UserService, private route: ActivatedRoute) { }
-
-  // Quando la vista viene inizializzata
-  // ngOnInit() {
-    // this.user = new User(); // di default mettiamo 'user' vuoto, però non appena arriva il parametro (asincrono), noi andiamo a chiamare il servizio*
-
-    // Attraverso il metodo 'subscribe' mi abbono al servizio ActivtedRoute
-    // this.route.params.subscribe( // Quando viene attivata questa rotta noi abbiamo accesso a una variabile
-      // (params) => { // ...a cui daremo il nome (ad esempio) di params
-        // this.user = this.userService.getUser(+params.id); // questo è il metodo normale, per evitare problemi con TypeScript utilizziamo quello inserito sotto
-        // this.user = this.userService.getUser(Number(params['id'])); // *inizializzo l'utente, caricando l'utente che si trova quell'id
-        // in questo modo posso avere accesso all'id
-      // }
-    // )
-  // }
+  constructor(private userService: UserService,private route: ActivatedRoute) {
+    // Creo un nuovo oggetto della classe User e lo assegno alla proprietà user della classe
+    this.user = new User();
+    // Creo un nuovo oggetto della classe User e lo assegno alla proprietà __user della classe
+    this.__user = new User();
+    // Creo un nuovo oggetto della classe User e lo assegno alla proprietà userCopy della classe
+    this.userCopy = new User();
+  }
 
   ngOnInit(): void {
     // Sottoscrizione ai cambiamenti dei parametri dell'URL
@@ -60,6 +53,8 @@ get user() {
     } else {
       this.userService.createUser(this.user);
     }
+    // Dissociamo 'this.user' dall'utente precedentemente creato/modificato
+    this.user = new User();
   }
 
   resetForm(form: FormGroup) {

@@ -1,3 +1,54 @@
 {
-  "users": [{"id":1,"name":"Daniele1","lastname":"Segreto1","email":"daniele@gmail.com","fiscalcode":"SGTDAN77J33X777Z","province":"Palermo","phone":"3334455678","age":33},{"id":2,"name":"Daniele2","lastname":"Segreto2","email":"daniele@gmail.com","fiscalcode":"SGTDAN77J33X777Z","province":"Palermo","phone":"3334455678","age":33},{"id":3,"name":"Daniele3","lastname":"Segreto3","email":"daniele@gmail.com","fiscalcode":"SGTDAN77J33X777Z","province":"Palermo","phone":"3334455678","age":33},{"id":4,"name":"Daniele4","lastname":"Segreto4","email":"daniele@gmail.com","fiscalcode":"SGTDAN77J33X777Z","province":"Palermo","phone":"3334455678","age":33}]
+  "users": [
+    {
+      "id": 1,
+      "name": "Daniele1",
+      "lastname": "Segreto1",
+      "email": "daniele@gmail.com",
+      "fiscalcode": "SGTDAN77J33X777Z",
+      "province": "Palermo",
+      "phone": "3334455678",
+      "age": 33
+    },
+    {
+      "id": 2,
+      "name": "Daniele2",
+      "lastname": "Segreto2",
+      "email": "daniele@gmail.com",
+      "fiscalcode": "SGTDAN77J33X777Z",
+      "province": "Palermo",
+      "phone": "3334455678",
+      "age": 33
+    },
+    {
+      "id": 3,
+      "name": "Daniele3",
+      "lastname": "Segreto3",
+      "email": "daniele@gmail.com",
+      "fiscalcode": "SGTDAN77J33X777Z",
+      "province": "Palermo",
+      "phone": "3334455678",
+      "age": 33
+    },
+    {
+      "name": "Daniele-patch",
+      "lastname": "From vscode",
+      "email": "newuser@gmail.com",
+      "fiscalcode": "SGTDAN77J33X777P",
+      "province": "Palermo",
+      "phone": "3334455678",
+      "age": 33,
+      "id": 4
+    },
+    {
+      "name": "New user",
+      "lastname": "From vscode",
+      "email": "newuser@gmail.com",
+      "fiscalcode": "SGTDAN77J33X777Z",
+      "province": "Palermo",
+      "phone": "3334455678",
+      "age": 33,
+      "id": 5
+    }
+  ]
 }

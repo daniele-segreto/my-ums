@@ -4,6 +4,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NavComponent } from './nav/nav.component';
 import { UserDataComponent } from './user-data/user-data.component';
+import { HttpClientModule } from '@angular/common/http'; // Importo il Client HTTP
 
 @NgModule({
   declarations: [
@@ -12,6 +13,7 @@ import { UserDataComponent } from './user-data/user-data.component';
     UserDataComponent
   ],
   imports: [
+    HttpClientModule, // Importo il Client HTTP
     BrowserModule,
     AppRoutingModule,
   ],

@@ -1,85 +1,42 @@
 import { Injectable } from '@angular/core';
 import { User } from '../classes/User';
 import { UserInterface } from '../interfaces/user';
+import { HttpClient } from '@angular/common/http'; // Importo il HttpClient per fare delle chiamate
+import { environment } from '../../environments/environment'; // Importo environment per prendere la nostra APIURL
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
+  apiurl = environment.APIURL; // Salvo il valore 'http://localhost:3000/users' sulla variabile 'apiurl'
 
-  constructor() { }
+  // Inietto HttpClient per fare delle chiamate
+  constructor(private http: HttpClient) { } // Lo tipifico a 'private' in modo da avere accesso a questa proprietà
 
-  users: User[] = [
-    {
-      id: 1,
-      name: 'Daniele1',
-      lastname: 'Segreto1',
-      email: 'daniele@gmail.com',
-      fiscalcode: 'SGTDAN77J33X777Z',
-      province: 'Palermo',
-      phone: '3334455678',
-      age: 33,
-    },
-    {
-      id: 2,
-      name: 'Daniele2',
-      lastname: 'Segreto2',
-      email: 'daniele@gmail.com',
-      fiscalcode: 'SGTDAN77J33X777Z',
-      province: 'Palermo',
-      phone: '3334455678',
-      age: 33
-    },
-    {
-      id: 3,
-      name: 'Daniele3',
-      lastname: 'Segreto3',
-      email: 'daniele@gmail.com',
-      fiscalcode: 'SGTDAN77J33X777Z',
-      province: 'Palermo',
-      phone: '3334455678',
-      age: 33
-    },
-    {
-      id: 4,
-      name: 'Daniele4',
-      lastname: 'Segreto4',
-      email: 'daniele@gmail.com',
-      fiscalcode: 'SGTDAN77J33X777Z',
-      province: 'Palermo',
-      phone: '3334455678',
-      age: 33
-    },
-  ];
-
-  // getUsers() ritorna un array di utenti (meglio tipicizzare)
-  getUsers(): User[] {
-    return this.users;
+  // OTTENGO LISTA UTENTI - Adesso ritorna un Observable (di tipo array di User), non più un semplice array di utenti (quindi bisogna specificarlo)
+  getUsers(): Observable<User[]> { // *importo Observable da 'rxjs'
+    return this.http.get<User[]>(this.apiurl); // tipifichiamo che questa get ritornerà un elenco di utenti
   }
 
-  // getUser() riceve un id e ritorna un utente a quella posizione (cioè alla stessa posizione dell'id selezionato), oppure undefined
-  getUser(id: number): User | undefined {
-    // Restituisce l'utente corrispondente all'id utilizzando il metodo find sull'array degli utenti
-    return this.users.find(user => user.id === id);
+  // OTTENGO SINGOLO UTENTE - Riceve un id e ritorna un Observable di User
+  getUser(id: number): Observable<User> { // *
+    return this.http.get<User>(this.apiurl + '/' + id); // tipifichiamo che questa get ritornerà un utente
   }
 
+  // ELIMINO UTENTE - Ritorna un utente
   deleteUser(user: User) {
-    const index = this.users.indexOf(user);
-    if (index > -1) {
-      this.users.splice(index, 1);
-    }
+    return this.http.delete<User>(this.apiurl + '/' + user.id); // a differenza degli altri metodi inserisco 'delete' e 'user.id' per eliminare il singolo utente
   }
 
-  updateUser(user: UserInterface) {
-    const idx = this.users.findIndex((v) => v.id === user.id);
-    // alert(idx);
-    if (idx !== -1) {
-      this.users[idx] = {...user};
-    }
+  // MODIFICO UTENTE - Ritorna un Observable di User
+  updateUser(user: UserInterface): Observable<User> {
+    return this.http.put<User>(this.apiurl + '/' + user.id, user); // a differenza degli altri metodi inserisco 'put' e 'user.id' per modificare il singolo utente, inoltre il metodo 'put' ha bisogno del 'body' della chiamata (in questo caso possiamo passare 'user')
   }
 
-  createUser(user: UserInterface) {
-    this.users.splice(0, 0, {...user});
+  // CREO NUOVO UTENTE - Ritorna un Observable di User
+  createUser(user: UserInterface): Observable<User>  {
+    return this.http.post<User>(this.apiurl + '/', user); // a differenza degli altri metodi inserisco 'post' per modificare il singolo utente, inoltre il metodo 'post' ha bisogno del 'body' della chiamata (in questo caso possiamo passare 'user') N.B. non abbiamo l'id (user.id) perchè è un utente nuovo, quindi va a scrivere una nuova risorsa su 'this.apiurl'
   }
 
 }

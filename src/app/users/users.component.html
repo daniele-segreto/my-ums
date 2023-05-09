@@ -13,11 +13,19 @@
     </tr>
   </thead>
 
-  <tbody>
+  <!-- 1) L'attributo *ngIf viene utilizzato per
+      condizionare la visualizzazione del corpo della tabella sulla disponibilità della lista di utenti.
+      2) Quando l'Observable emette un valore, questo viene assegnato alla variabile 'users'.
+      Il corpo della tabella viene quindi popolato con i dati degli utenti,
+      grazie alla direttiva *ngFor, che cicla sull'array 'users' e crea una riga della tabella per ogni utente.
+      3) Quando l'Observable non emette alcun valore, il corpo della tabella non viene mostrato.-->
+  <tbody *ngIf="(users$ | async) as users">
   <tr app-user
   *ngFor="let user of users" [user-data]="user"
   (onDeleteUser)="onDeleteUser($event)"
   (onSelectUser)="onSelectUser($event)">
   </tr>
   </tbody>
+  <!-- N.B. la pipe 'async' automaticamente farà la 'subscribe' a questa stream di dati che abbiamo impostato sul .ts (cioè 'users$'). Farà la 'subscribe' e ci consegnerà i 'dati';
+    Co, 'as' mettiamo un alias per la risposta, cioè diciamo: quando hai fatto la 'subscribe' e abbiamo i 'dati' dello stream, passa questi dati alla variabile 'users'. -->
 </table>

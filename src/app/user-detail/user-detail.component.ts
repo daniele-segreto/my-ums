@@ -22,23 +22,22 @@ get user() {
   return this.__user;
 }
 
-  constructor(private userService: UserService,
-              private route: ActivatedRoute,
-              private router: Router // Inetto anche il Router
-  ) {
+  constructor(private userService: UserService, private route: ActivatedRoute, private router: Router) {
     this.user = new User();
     this.__user = new User();
     this.userCopy = new User();
   }
 
   ngOnInit(): void {
+    // Sottoscrizione ai parametri della route attuale
     this.route.params.subscribe(param => {
+      // Estrazione del parametro 'id' dai parametri della route e conversione in numero
       const id = Number(param['id']);
-      const user = this.userService.getUser(id);
-      if (user) {
-        this.user = user;
-      }
-    })
+      // Chiamata al servizio userService per recuperare l'utente con l'id specificato
+      this.userService.getUser(id)
+        // Sottoscrizione all'Observable restituito dal servizio
+        .subscribe(user => this.user = user);
+    });
   }
 
   saveUser() {
@@ -47,10 +46,7 @@ get user() {
     } else {
       this.userService.createUser(this.user);
     }
-    // Adesso non c'è più bisogno di resettare, perchè in questo caso ritorniamo alla home page
-    // this.user = new User();
-    // Dopo aver salvato l'utente, possiamo tornare alla home page (in questo caso 'users')
-    this.router.navigate(['users']); // 'users' è il percorso il cui vogliamo navigare
+    this.router.navigate(['users']);
   }
 
   resetForm(form: FormGroup) {

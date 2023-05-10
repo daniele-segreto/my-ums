@@ -29,24 +29,38 @@ get user() {
   }
 
   ngOnInit(): void {
-    // Sottoscrizione ai parametri della route attuale
+    // Questo codice si iscrive a eventuali cambiamenti nei parametri dell'URL
     this.route.params.subscribe(param => {
-      // Estrazione del parametro 'id' dai parametri della route e conversione in numero
-      const id = Number(param['id']);
-      // Chiamata al servizio userService per recuperare l'utente con l'id specificato
-      this.userService.getUser(id)
-        // Sottoscrizione all'Observable restituito dal servizio
-        .subscribe(user => this.user = user);
+      // Verifica se l'ID è presente nei parametri dell'URL
+      if (param['id']) {
+        // Estrae l'ID dai parametri dell'URL e lo converte in un numero
+        const id = Number(param['id']);
+        // Chiama il servizio UserService per ottenere i dati dell'utente corrispondente all'ID
+        // e assegna i dati dell'utente alla variabile 'user' tramite il metodo subscribe()
+        this.userService.getUser(id)
+          .subscribe(user => this.user = user);
+      }
     });
   }
 
+  // Questa funzione salva i dati dell'utente
   saveUser() {
+    let obs; // obs sta per observable
+    // Verifica se l'utente esiste già o è un nuovo utente
     if (this.user.id > 0) {
-      this.userService.updateUser(this.user);
+      // Se l'utente esiste già, chiama il metodo di UserService per aggiornare i dati dell'utente
+      obs = this.userService.updateUser(this.user);
     } else {
-      this.userService.createUser(this.user);
+      // Se l'utente è nuovo, chiama il metodo di UserService per creare un nuovo utente
+      obs = this.userService.createUser(this.user);
     }
-    this.router.navigate(['users']);
+    // Si iscrive all'observable 'obs' per ricevere la risposta dal server
+    obs.subscribe(resp => {
+      // Stampa la risposta ricevuta dal server nella console
+      console.log('response', resp);
+      // Dopo aver salvato i dati dell'utente, naviga all'elenco degli utenti (indirizziamo l'utente alla pagina 'user')
+      this.router.navigate(['users']);
+    });
   }
 
   resetForm(form: FormGroup) {

@@ -45,10 +45,20 @@
       "lastname": "From vscode",
       "email": "newuser@gmail.com",
       "fiscalcode": "SGTDAN77J33X777Z",
-      "province": "Palermo",
+      "province": "",
       "phone": "3334455678",
       "age": 33,
       "id": 5
+    },
+    {
+      "id": 6,
+      "name": "Daniele test",
+      "lastname": "Daniele test",
+      "email": "danieletest@gmail.com",
+      "fiscalcode": "SGTDAN77J33X777Z",
+      "province": "",
+      "phone": "333666999",
+      "age": 18
     }
   ]
 }

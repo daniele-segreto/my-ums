@@ -9,33 +9,32 @@ import { Observable } from 'rxjs';
   styleUrls: ['./users.component.css']
 })
 export class UsersComponent implements OnInit {
-
   title = 'Users';
 
-  // users: User[] = [];
-  //public users: Observable<User[]> = new Observable; // trasformiamo 'users' in un Observable di tipo array
-
-  // - oppure lo impostiamo direttamente quà, invece che metterlo in ngOnInit() --->
-
-  // Dichiarazione di una variabile pubblica della classe con tipo Observable<User[]>
-  // Inizializzazione della variabile con la chiamata al metodo getUsers() del servizio 'service'
-  public users$: Observable<User[]> = this.service.getUsers(); // <=== *
-  // N.B. il dollaro il users$ è una convenzione che serve ad indicare che la variabile è un Observable (una stream di dati)
-  // Questo Observable viene chiamato quando noi chiamiamo la pipe sull'html
+  public users$: Observable<User[]> = this.service.getUsers();
+  public users: User[] = []; // Inizializzo la variabile 'users' con un array vuoto di oggetti 'User' (serve per il METODO 2)
 
   @Output() updateUser = new EventEmitter<User>();
 
   constructor(private service: UserService) {}
 
   ngOnInit(): void {
-    // Chiamata al servizio getUsers() tramite l'istanza di this.service
-    // this.users = this.service.getUsers() <=== *
-      // Sottoscrizione all'Observable restituito dal servizio
-      // .subscribe(response => this.users = response);
+    // *METODO 2:
+    this.service.getUsers().subscribe(res => this.users = res);
   }
 
+  // Questo codice cancella l'utente dal database e ricarica la pagina
   onDeleteUser(user: User) {
-    this.service.deleteUser(user);
+    this.service.deleteUser(user).subscribe(res => { // Si sottoscrive all'Observable restituito dal metodo 'deleteUser' del servizio per eliminare l'utente dal database
+
+      // METODO 1: utilizzando sul file html: <tbody *ngIf="(users$ | async) as users">
+      // location.reload(); // Ricarica la pagina dopo la cancellazione dell'utente
+
+      // *METODO 2: togliendo l'*ngIf dal <tbody>
+      // Questo codice richiede la lista degli utenti dal server e la assegna alla variabile 'users'
+      this.service.getUsers().subscribe(res => this.users = res);
+      // Si sottoscrive all'Observable restituito dal metodo 'getUsers' del servizio per ottenere la lista degli utenti dal server. Quando la risposta arriva, assegna la lista degli utenti alla variabile 'users'.
+    });
   }
 
   onSelectUser(user: User) {

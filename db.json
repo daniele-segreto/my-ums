@@ -11,26 +11,6 @@
       "age": 33
     },
     {
-      "id": 2,
-      "name": "Daniele2",
-      "lastname": "Segreto2",
-      "email": "daniele@gmail.com",
-      "fiscalcode": "SGTDAN77J33X777Z",
-      "province": "Palermo",
-      "phone": "3334455678",
-      "age": 33
-    },
-    {
-      "id": 3,
-      "name": "Daniele3",
-      "lastname": "Segreto3",
-      "email": "daniele@gmail.com",
-      "fiscalcode": "SGTDAN77J33X777Z",
-      "province": "Palermo",
-      "phone": "3334455678",
-      "age": 33
-    },
-    {
       "name": "Daniele-patch",
       "lastname": "From vscode",
       "email": "newuser@gmail.com",
@@ -58,6 +38,16 @@
       "fiscalcode": "SGTDAN77J33X777Z",
       "province": "",
       "phone": "333666999",
+      "age": 18
+    },
+    {
+      "id": 7,
+      "name": "User test",
+      "lastname": "",
+      "email": "",
+      "fiscalcode": "",
+      "province": "",
+      "phone": "",
       "age": 18
     }
   ]

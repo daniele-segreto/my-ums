@@ -20,8 +20,8 @@ export class UserComponent {
   faInfo = faInfo; // Icona info (per il tasto del dettaglio utente)
   iconSize: SizeProp | undefined = 'xs';
 
-    // Inietto il router nel costruttore
-    constructor(private userService: UserService, private route: Router) { }
+  // Inietto il router nel costruttore
+  constructor(private userService: UserService, private route: Router) { }
 
   deleteUser() {
     this.userDeleted.emit(this.user);

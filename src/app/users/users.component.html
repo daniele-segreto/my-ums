@@ -13,15 +13,15 @@
     </tr>
   </thead>
 
-  <!-- METODO 1: -->
-  <!-- <tbody *ngIf="(users$ | async) as users"> -->
-
-  <!-- METODO 2: -->
-  <tbody>
-  <tr app-user
-      *ngFor="let user of users" [user-data]="user"
-      (onDeleteUser)="onDeleteUser($event)"
-      (onSelectUser)="onSelectUser($event)">
-  </tr>
+  <!-- <tbody> torniamo al metodo precedente (era un esempio) -->
+    <!-- (1) Viene utilizzata la direttiva *ngFor per iterare sugli oggetti "user" e generare un elemento "tr" per ciascun oggetto;
+      (2) Viene utilizzata l'attributo "id" per impostare un identificatore univoco per ciascun elemento "tr" generato dalla direttiva "app-user";
+      (3) L'attributo "id" viene impostato al valore della proprietà "id" dell'oggetto "user" corrente nell'iterazione della direttiva *ngFor, cioè id="{{user.id}}. -->
+  <tbody *ngIf="(users$ | async) as users">
+    <tr app-user *ngFor="let user of users" id="{{user.id}}"
+        [user-data]="user"
+        (onDeleteUser)="onDeleteUser($event)"
+        (onSelectUser)="onSelectUser($event)">
+    </tr>
   </tbody>
 </table>

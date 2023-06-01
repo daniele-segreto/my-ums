@@ -9,49 +9,62 @@ import { UserComponent } from '../user/user.component';
   templateUrl: './users.component.html',
   styleUrls: ['./users.component.css']
 })
-export class UsersComponent implements OnInit, AfterViewInit { // implemento anche AfterViewInit
+export class UsersComponent implements OnInit, AfterViewInit {
   title = 'Users';
 
   public users$: Observable<User[]> = this.service.getUsers();
-  // public users: User[] = []; // non serve più (era un esempio)
 
   @Output() updateUser = new EventEmitter<User>();
 
-  // @ViewChildren(UserComponent) trs!: QueryList<UserComponent>;
-
-  // Utilizzo il decoratore @ViewChildren in Angular per ottenere un riferimento
-  // a tutti gli elementi UserComponent presenti all'interno di un componente.
-  // La proprietà 'read' indica che l'oggetto restituito dalla QueryList sarà di tipo ElementRef.
   @ViewChildren(UserComponent, {read: ElementRef}) trs!: QueryList<ElementRef>;
-  // '!' vuol dire che trs non sarà né 'null', ne 'undefined', quindi non verrà segnalato come errore
 
   constructor(private service: UserService) {}
 
-  // Il metodo ngAfterViewInit() viene chiamato quando la vista del componente è stata completamente inizializzata
   ngAfterViewInit(): void {
-    // Stampa sulla console il messaggio "afterViewInit" e la lista di riferimenti agli elementi ottenuta tramite il decoratore @ViewChildren
     console.log('afterViewInit', this.trs);
-    // this.trs.forEach(ele => console.log(ele)); // lo metto in: 'onDeleteUser'
   }
 
   ngOnInit(): void {
-    // this.service.getUsers().subscribe(res => this.users = res); // non serve più (era un esempio)
+    // code...
   }
 
-  // METODO 3:
+  // QUESTA PARTE NON FUNZIONAVA...
+  // onDeleteUser - Elimina un utente
+  // onDeleteUser(user: User) {
+    // Effettua una chiamata al servizio per eliminare l'utente specificato e si sottoscrive all'observable per ottenere la risposta
+    // this.service.deleteUser(user).subscribe(
+      // res => {
+      // Visualizza un messaggio di avviso con il messaggio di risposta ricevuto
+      // alert(res.message);
+      // Effettua una chiamata per ottenere nuovamente la lista degli utenti dal servizio e si sottoscrive all'observable per ottenere i dati aggiornati
+      // this.service.getUsers().subscribe(res=>{this.users = res.data});
+      // },
+      // Gestisce eventuali errori durante la chiamata
+      // (err: any) => {
+      // Visualizza un messaggio di avviso con il messaggio di errore ricevuto
+      // alert(err.error.message);
+      // Stampa l'errore nella console per scopi di debug o di registrazione
+      // console.log(err);
+      // }
+    // )
+  // }
+
+  // ...E' STATA SOSTITUITA CON QUESTA (utilizzando le indicazioni su: https://github.com/hidran/corso-angular/blob/2fdb83a0e5805c25ccfc13b3b88ceb06193967e5/src/app/users/users.component.ts):
+
+  // onDeleteUser - Riceve un utente da eliminare
   onDeleteUser(user: User) {
-    // Viene chiamato il metodo deleteUser() dal servizio (passando l'utente da eliminare)
+    // Effettua una chiamata al servizio per eliminare l'utente specificato e si sottoscrive all'observable per ottenere la risposta
     this.service.deleteUser(user).subscribe(res => {
-      // this.service.getUsers().subscribe(res => this.users = res); non serve più (era un esempio)
-      // Viene iterata la lista di elementi UserComponent ottenuta tramite il decoratore @ViewChildren
+      // Itera su ogni elemento nell'array trs (presumibilmente una collezione di elementi HTML)
       this.trs.forEach(ele => {
-        // Per ciascun elemento della lista viene ottenuto l'oggetto nativo corrispondente
+        // Ottiene l'elemento HTML corrente dalla raccolta
         const el = ele.nativeElement;
-        // Se l'id dell'elemento corrisponde all'id dell'utente che si desidera eliminare...
+        // Verifica se l'ID dell'elemento corrente corrisponde all'ID dell'utente da eliminare
         if (Number(el.id) === user.id) {
-          el.parentNode.removeChild(el); //...l'elemento viene rimosso dal DOM
+          // Rimuove l'elemento HTML dal suo genitore (presumibilmente una tabella)
+          el.parentNode.removeChild(el);
         }
-      });
+      })
     });
   }
 

@@ -14,16 +14,11 @@ export class UserDataComponent implements OnInit {
   constructor(private userService: UserService, private route: ActivatedRoute) {};
 
   ngOnInit(): void {
-    // // Ascolto i cambiamenti dell'URL per recuperare i parametri (sottoscrivo a paraMap, non più a params)
     this.route.paramMap.subscribe(param => {
-      // Recupero l'id dall'URL e lo converto in numero
       const id = Number(param.get('id'));
-      // Se l'id è presente
       if (id) {
-        // Chiamo il servizio per ottenere l'utente corrispondente all'id
         this.userService.getUser(id)
-        // Ascolto la risposta del servizio e assegno l'utente alla variabile user
-        .subscribe(user => this.user = user);
+        .subscribe(user => this.user = user.data);
       }
     });
   }

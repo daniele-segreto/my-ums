@@ -29,16 +29,11 @@ get user() {
   }
 
   ngOnInit(): void {
-    // Sottoscrivo ai cambiamenti dell'URL tramite il service ActivatedRoute (a paraMap, non più a params)
     this.route.paramMap.subscribe(param => {
-      // Estraggo l'id dal parametro 'id' dell'URL e lo converte in numero
       const id = Number(param.get('id'));
-      // Se l'id è presente
       if (id) {
-        // Chiamo il servizio userService per ottenere l'oggetto user associato all'id
         this.userService.getUser(id)
-        // Ascolto la risposta del servizio e assegna l'oggetto user alla variabile user
-          .subscribe(user => this.user = user);
+          .subscribe(user => this.user = user.data);
       }
     });
   }

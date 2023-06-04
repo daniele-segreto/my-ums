@@ -7,4 +7,7 @@ export const environment = {
   APIURL: 'http://localhost:8000/api/users' // Funziona con laraapi (progetto Laravel)
 };
 
-// Questo codice definisce una costante di ambiente utilizzata in un'applicazione web. La costante specifica che l'applicazione non è in modalità di produzione e contiene l'URL di un endpoint API. In questo caso, l'endpoint API è in ascolto sulla porta 3000 del server locale.
+// Questo codice definisce una costante di ambiente utilizzata in un'applicazione web. La costante specifica che l'applicazione non è in modalità di produzione e contiene l'URL di un endpoint API. In questo caso, l'endpoint API è in ascolto sulla porta 8000 del server locale.
+
+// Quando sarà in produzione e avremo finito tutto possiamo mettere il server reale dove avremo le nostre api.
+// Metteremo quindi tutto sul nostro file di produzione 'environment.prods.ts

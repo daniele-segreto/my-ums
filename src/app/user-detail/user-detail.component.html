@@ -1,10 +1,25 @@
+<!-- La proprietà #f fa riferimento al form intero -->
 <form #f="ngForm">
   <input type="hidden" name="id" [(ngModel)]="user.id">
 
   <div class="row mt-4">
     <div class="form-group col-sm-6">
       <label for="firtstname">First name</label>
-      <input class="form-control" [(ngModel)]="user.name" name="firtstname" id="firtstname">
+      <!-- Questo input è obbligatorio e viene associato al modello "firstName" -->
+      <!-- La lunghezza minima del campo è impostata a 3 caratteri -->
+      <!-- Il valore del campo viene associato alla proprietà "name" dell'oggetto "user" tramite [(ngModel)] -->
+      <input required #firstName="ngModel" minlength="3" class="form-control" [(ngModel)]="user.name" name="firtstname" id="firtstname">
+        <!-- Questo div viene visualizzato solo se il campo "firstName" è stato modificato, toccato e ha degli errori -->
+      <div *ngIf="firstName.dirty && firstName.touched && firstName.errors">
+        <!-- Questo div viene visualizzato solo se il campo "firstName" è obbligatorio (cioè se il campo è vuoto) -->
+        <div class="alert alert-danger" *ngIf="firstName.errors?.['required']">
+          Il campo nome richiede un valore
+        </div>
+        <!-- Questo div viene visualizzato solo se il campo "firstName" ha una lunghezza inferiore alla minima -->
+        <div class="alert alert-danger" *ngIf="firstName.errors?.['minlength']">
+          La lunghezza minima del campo nome è {{firstName?.errors?.['minlength'].requiredLength}} caratteri
+        </div>
+      </div>
     </div>
     <div class="form-group col-sm-6">
       <label for="lastname">Last name</label>
@@ -52,7 +67,8 @@
     </div>
     <!-- TASTO PER SALVARE UN NUOVO UTENTE -->
     <div class="col-md-4">
-      <a class="btn btn-lg btn-success w-100" (click)="saveUser()">SAVE</a>
+      <!-- Con [disabled]="f.invalid" stiamo a dire che se il form non è valido, questo pulsante verrà abilitato -->
+      <button [disabled]="f.invalid" class="btn btn-lg btn-success w-100" (click)="saveUser()">SAVE</button>
     </div>
   </div>
 </form>

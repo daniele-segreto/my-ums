@@ -1,4 +1,5 @@
-/* .userForm {
-  width: 98%;
-  margin: 0 auto;
-} */
+/* Se ispezioniamo il campo notiamo che esso ha delle classi a seconda del suo stato (ng-valid / ng-invalid) */
+/* Se il campo non è valido metto un bordo rosso */
+input.ng-invalid {
+  border: 1px solid red;
+}

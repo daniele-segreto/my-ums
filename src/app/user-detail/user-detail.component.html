@@ -8,16 +8,27 @@
       <!-- Questo input è obbligatorio e viene associato al modello "firstName" -->
       <!-- La lunghezza minima del campo è impostata a 3 caratteri -->
       <!-- Il valore del campo viene associato alla proprietà "name" dell'oggetto "user" tramite [(ngModel)] -->
-      <input required #firstName="ngModel" minlength="3" class="form-control" [(ngModel)]="user.name" name="firtstname" id="firtstname">
-        <!-- Questo div viene visualizzato solo se il campo "firstName" è stato modificato, toccato e ha degli errori -->
-      <div *ngIf="firstName.dirty && firstName.touched && firstName.errors">
+      <!-- Può contenere soltanto lettere (pattern="[a-zA-Z\s]*") -->
+      <input required pattern="[a-zA-Z\s]*" #firstName="ngModel" minlength="3" class="form-control" [(ngModel)]="user.name" name="firtstname" id="firtstname">
+      <!-- Questo div viene visualizzato solo se il campo "firstName" è stato modificato, toccato e ha degli errori -->
+      <div *ngIf="firstName.dirty && firstName.touched && firstName.invalid"> <!-- .invalid invece di .errors -->
+
+        <!-- Se il form è invalid possiamo mostrare questo elenco degli errori -->
+        <!-- {{firstName.errors | json}} -->
+
         <!-- Questo div viene visualizzato solo se il campo "firstName" è obbligatorio (cioè se il campo è vuoto) -->
         <div class="alert alert-danger" *ngIf="firstName.errors?.['required']">
-          Il campo nome richiede un valore
+          Il campo richiede un valore
         </div>
+
         <!-- Questo div viene visualizzato solo se il campo "firstName" ha una lunghezza inferiore alla minima -->
         <div class="alert alert-danger" *ngIf="firstName.errors?.['minlength']">
-          La lunghezza minima del campo nome è {{firstName?.errors?.['minlength'].requiredLength}} caratteri
+          La lunghezza minima del campo è {{firstName?.errors?.['minlength'].requiredLength}} caratteri
+        </div>
+
+        <!-- Questa sezione viene visualizzata solo se il campo "firstName" non rispetta il pattern richiesto (cioè possono essere accettate soltanto lettere) -->
+        <div class="alert alert-danger" *ngIf="firstName.errors?.['pattern']">
+          Il campo può contenere soltanto lettere: {{firstName?.errors?.['pattern'].requiredPattern}}
         </div>
       </div>
     </div>
@@ -45,7 +56,32 @@
     </div>
     <div class="form-group col-sm-6">
       <label for="age">Age</label>
-      <input class="form-control" [(ngModel)]="user.age" type="number" name="age" id="age">
+      <!-- Questo input è obbligatorio e viene associato al modello "age" -->
+      <!-- La lunghezza minima del campo è impostata a min. 2 caratteri e max 3 caratteri -->
+      <!-- Il valore del campo viene associato alla proprietà "age" dell'oggetto "user" tramite [(ngModel)] -->
+      <!-- Può contenere soltanto numeri (pattern="[0-9]{2,3}") -->
+      <input class="form-control" [(ngModel)]="user.age" #age="ngModel" required minlength="2" maxlength="3" pattern="[0-9]{2,3}" type="number" name="age" id="age">
+      <!-- Questo div viene visualizzato solo se il campo "age" è stato modificato, toccato e ha degli errori -->
+      <div *ngIf="age.dirty && age.touched && age.invalid"> <!-- .invalid invece di .errors -->
+
+        <!-- Se il form è invalid possiamo mostrare questo elenco degli errori -->
+        <!-- {{age.errors | json}} -->
+
+        <!-- Questo div viene visualizzato solo se il campo "age" è obbligatorio (cioè se il campo è vuoto) -->
+        <div class="alert alert-danger" *ngIf="age.errors?.['required']">
+          Il campo richiede un valore
+        </div>
+
+        <!-- Questo div viene visualizzato solo se il campo "age" ha una lunghezza inferiore alla minima -->
+        <div class="alert alert-danger" *ngIf="age.errors?.['minlength']">
+          La lunghezza minima del campo è {{age?.errors?.['minlength'].requiredLength}} caratteri
+        </div>
+
+        <!-- Questa sezione viene visualizzata solo se il campo "age" non rispetta il pattern richiesto (cioè possono essere accettati soltanto numeri) -->
+        <div class="alert alert-danger" *ngIf="age.errors?.['pattern']">
+          Il campo può contenere soltanto numeri: {{age?.errors?.['pattern'].requiredPattern}}
+        </div>
+      </div>
     </div>
   </div>
 
@@ -67,6 +103,7 @@
     </div>
     <!-- TASTO PER SALVARE UN NUOVO UTENTE -->
     <div class="col-md-4">
+      <!-- {{f.invalid | json}} -->
       <!-- Con [disabled]="f.invalid" stiamo a dire che se il form non è valido, questo pulsante verrà abilitato -->
       <button [disabled]="f.invalid" class="btn btn-lg btn-success w-100" (click)="saveUser()">SAVE</button>
     </div>

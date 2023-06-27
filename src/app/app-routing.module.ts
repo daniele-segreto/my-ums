@@ -8,6 +8,7 @@ import { FormsModule } from '@angular/forms';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { UserService } from './services/user.service';
 import { UserDataComponent } from './user-data/user-data.component';
+import { RouteGuardService } from './route-guard.service'; // Importo RouteGuardService
 
 const routes: Routes = [
   {
@@ -22,11 +23,12 @@ const routes: Routes = [
   },
   {
     path: 'users/new',
-    component: UserDetailComponent
+    component: UserDetailComponent,
+    canActivate: [RouteGuardService] // Protegge la rotta, cioè non permette all'utente di accedervi
   },
   {
     path: 'users/:id/edit',
-    component: UserDetailComponent
+    component: UserDetailComponent,
   },
   {
     // con 'http://localhost:4200/users/1' possiamo vedere ciò che abbiamo sul componente 'user-data'
@@ -47,6 +49,9 @@ const routes: Routes = [
     FontAwesomeModule,
     CommonModule
   ],
-  exports: [RouterModule]
+  exports: [RouterModule],
+  providers: [
+    RouteGuardService, // Fornisce l'istanza del servizio RouteGuardService per l'iniezione di dipendenze
+  ]
 })
 export class AppRoutingModule { }

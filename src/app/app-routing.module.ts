@@ -8,7 +8,8 @@ import { FormsModule } from '@angular/forms';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { UserService } from './services/user.service';
 import { UserDataComponent } from './user-data/user-data.component';
-import { RouteGuardService } from './route-guard.service'; // Importo RouteGuardService
+import { RouteGuardService } from './route-guard.service';
+import { LoginComponent } from './login/login.component'; // Importo il Componente Login
 
 const routes: Routes = [
   {
@@ -34,6 +35,10 @@ const routes: Routes = [
     // con 'http://localhost:4200/users/1' possiamo vedere ciò che abbiamo sul componente 'user-data'
     path: 'users/:id',
     component: UserDataComponent
+  },
+  {
+    path: 'login',
+    component: LoginComponent
   }
 ];
 

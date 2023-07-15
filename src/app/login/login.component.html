@@ -1,1 +1,44 @@
-<h1>login works!</h1>
+<div class="row">
+  <div class="col-md-6 offset-md-3">
+    <h1>
+      login funziona!
+    </h1>
+    <!-- Form -->
+    <form action="loginForm" #f="ngForm" (ngSubmit)="signIn(f)">
+      <div class="form-group">
+        <label for="email">Email</label>
+        <!-- Input per l'email -->
+        <input class="form-control" required email type="email" ngModel #email="ngModel" name="email" id="email">
+
+        <div *ngIf="email.dirty && email.touched && email.invalid">
+          <!-- Messaggi di errore per l'input dell'email -->
+          <div class="alert alert-danger" *ngIf="email?.errors?.['required']">
+            Il campo email è obbligatorio
+          </div>
+          <div class="alert alert-danger" *ngIf="email?.errors?.['email']">
+            Il valore deve essere un indirizzo email valido
+          </div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="password">Password</label>
+        <!-- Input per la password -->
+        <input class="form-control" required minlength="6" type="password" ngModel #password="ngModel" name="password" id="password">
+
+        <div *ngIf="password.dirty && password.touched && password.invalid">
+          <!-- Messaggi di errore per l'input della password -->
+          <div class="alert alert-danger" *ngIf="password?.errors?.['required']">
+            Il campo password è obbligatorio
+          </div>
+          <div class="alert alert-danger" *ngIf="password?.errors?.['minlength']">
+            Il campo password deve avere una lunghezza di almeno {{password?.errors?.['minlength'].requiredLength}} caratteri
+          </div>
+        </div>
+      </div>
+      <div class="form-group text-center">
+        <!-- Pulsante di accesso -->
+        <button [disabled]="!f.valid" class="btn btn-primary">Accedi</button>
+      </div>
+    </form>
+  </div>
+</div>

@@ -7,7 +7,8 @@ import { UserDataComponent } from './user-data/user-data.component';
 import { HttpClientModule } from '@angular/common/http';
 import { UserService } from './services/user.service';
 import { AuthService } from './services/auth.service';
-import { LoginComponent } from './login/login.component'; // Importo il Componente Login
+import { LoginComponent } from './login/login.component';
+import { FormsModule } from '@angular/forms'; // Importo FormsModule
 
 @NgModule({
   declarations: [
@@ -20,8 +21,9 @@ import { LoginComponent } from './login/login.component'; // Importo il Componen
     HttpClientModule,
     BrowserModule,
     AppRoutingModule,
+    FormsModule // Serve a far funzionare il Form
   ],
-  providers: [UserService, AuthService], // Ho inserito i servizi nei Providers
+  providers: [UserService, AuthService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

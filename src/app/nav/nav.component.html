@@ -21,14 +21,18 @@
         <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
         <button class="btn btn-outline-success" type="submit">Search</button>
       </form>
+      <!-- $event è l'evento che verrà passato nel click di questo pulsante, possiamo catturarlo ed evitare che faccia l'azione di default, cioè navigare verso il # (il l'href con il cancelletto viene inserito per rendere farlo vedere come un link) -->
       <ul class="navbar-nav px-3">
-        <!-- Se l'utente non è loggato mostra il tasto 'Sign in' -->
+        <!-- Se l'utente non è loggato mostra il tasto 'Login' -->
         <li class="nav-item text-nowrap">
-          <a *ngIf="!isUserLoggedIn" class="nav-link" href="#">Sign in</a>
+          <a *ngIf="!isUserLoggedIn" (click)="signIn($event)" class="nav-link" href="#">Login</a>
+        </li>
+        <!-- Se l'utente non è loggato mostra il tasto 'Sign up' -->
+        <li class="nav-item text-nowrap">
+          <a *ngIf="!isUserLoggedIn" (click)="signUp($event)" class="nav-link" href="#">Sign up</a>
         </li>
         <!-- Se l'utente è loggato mostra il tasto 'Sign out' -->
         <li class="nav-item text-nowrap">
-          <!-- $event è l0evento che verrà passato nel click di questo pulsante, possiamo catturarlo ed evitare che faccia l'azione di default, cioè navigare verso il # (il l'href con il cancelletto viene inserito per rendere farlo vedere come un link) -->
           <a *ngIf="isUserLoggedIn" href="#" class="nav-link" (click)="logout($event)">Sign out</a>
         </li>
       </ul>

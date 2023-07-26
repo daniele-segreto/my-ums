@@ -32,7 +32,11 @@ export class AuthService {
 
   // Metodo per la registrazione dell'utente, richiede username, email e password come parametri
   signUp(username: string, email: string, password: string) {
-    // code...
+    // Verifica se esiste il token nello storage locale, inserendo l'email come valore del token
+    localStorage.setItem('token', email);
+
+    // Restituisce true, indicando che il login è avvenuto con successo
+    return true;
   }
 
   // Metodo per il logout dell'utente

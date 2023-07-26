@@ -9,7 +9,8 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { UserService } from './services/user.service';
 import { UserDataComponent } from './user-data/user-data.component';
 import { RouteGuardService } from './route-guard.service';
-import { LoginComponent } from './login/login.component'; // Importo il Componente Login
+import { LoginComponent } from './login/login.component';
+import { SignupComponent } from './signup/signup.component';
 
 const routes: Routes = [
   {
@@ -38,7 +39,13 @@ const routes: Routes = [
   },
   {
     path: 'login',
-    component: LoginComponent
+    component: LoginComponent,
+    pathMatch: 'full' // corrispondenza completa
+  },
+  {
+    path: 'signup',
+    component: SignupComponent,
+    pathMatch: 'full' // corrispondenza completa
   }
 ];
 

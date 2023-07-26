@@ -30,4 +30,16 @@ export class NavComponent {
     this.auth.logout(); // chiamo il metodo logout da AuthService
     this.router.navigate(['login']) // tramite il router direzioniamo l'utente verso la pagina di 'login'
   }
+
+  // SignIn
+  signIn(e: any) {
+    e.preventDefault();
+    this.router.navigate(['login']); // Nella parte di signIn, mandiamo l'utente alla pagine 'login'
+  }
+
+  // SignUp
+  signUp(e: any) {
+    e.preventDefault();
+    this.router.navigate(['signup']); // Nella parte di signUp, mandiamo l'utente alla pagine 'signup'
+  }
 }
